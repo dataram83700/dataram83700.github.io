@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dataram Sutrakar — Quality Assurance Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F6F7F9;
+    --surface: #FFFFFF;
+    --ink: #1B2A41;
+    --text: #2E3744;
+    --muted: #677282;
+    --rule: #DCE0E6;
+    --accent: #1F5F8B;
+    --accent-soft: #E7EFF6;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    color-scheme: light;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #13171D; --surface: #1A2028; --ink: #E8ECF1; --text: #CDD3DB;
+      --muted: #8E98A6; --rule: #2C343F; --accent: #82B6DC; --accent-soft: #1E2C3A;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #13171D; --surface: #1A2028; --ink: #E8ECF1; --text: #CDD3DB;
+    --muted: #8E98A6; --rule: #2C343F; --accent: #82B6DC; --accent-soft: #1E2C3A;
+    color-scheme: dark;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-behavior: smooth; scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 24px); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--sans); font-size: 1rem; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  img { max-width: 100%; }
+
+  .layout {
+    max-width: 1120px; margin: 0 auto; padding: 0 1.5rem;
+    display: grid; grid-template-columns: 1fr; gap: 0;
+  }
+  @media (min-width: 900px) {
+    .layout { grid-template-columns: 340px 1fr; gap: 4.5rem; padding: 0 2.5rem; }
+    .sidebar { position: sticky; top: env(safe-area-inset-top, 0px); height: 100vh; height: 100dvh; }
+  }
+
+  /* Sidebar */
+  .sidebar { padding: 3.5rem 0 2rem; display: flex; flex-direction: column; }
+  .monogram {
+    width: 64px; height: 64px; border: 1.5px solid var(--ink); border-radius: 50%;
+    display: grid; place-items: center; font-family: var(--serif);
+    font-size: 1.5rem; font-weight: 600; color: var(--ink); margin-bottom: 1.75rem;
+  }
+  .name {
+    font-family: var(--serif); font-weight: 700; color: var(--ink);
+    font-size: clamp(2.4rem, 5vw, 3.1rem); line-height: 1.05; letter-spacing: -0.015em; margin: 0;
+  }
+  .role { font-family: var(--serif); font-size: 1.25rem; color: var(--muted); margin: 0.6rem 0 1.25rem; }
+  .intro { max-width: 32ch; margin: 0 0 2rem; }
+  .nav { display: none; }
+  @media (min-width: 900px) {
+    .nav { display: block; margin-bottom: auto; }
+    .nav ul { list-style: none; padding: 0; margin: 0; }
+    .nav a {
+      display: block; padding: 0.35rem 0 0.35rem 1rem; color: var(--muted);
+      border-left: 2px solid var(--rule); font-size: 0.95rem;
+    }
+    .nav a:hover { color: var(--ink); text-decoration: none; }
+    .nav a.active { color: var(--ink); border-left-color: var(--accent); font-weight: 500; }
+  }
+  .contact-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin-top: 2rem; font-size: 0.95rem; }
+  .status {
+    display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--text);
+    background: var(--accent-soft); padding: 0.35rem 0.75rem; border-radius: 999px; align-self: flex-start;
+  }
+  
+
+  /* Main */
+  main { padding: 1rem 0 4rem; }
+  @media (min-width: 900px) { main { padding: 3.5rem 0 6rem; } }
+  section { padding: 2.5rem 0; border-top: 1px solid var(--rule); }
+  section:first-child { border-top: none; padding-top: 0.5rem; }
+  h2 {
+    font-family: var(--serif); font-weight: 600; color: var(--ink);
+    font-size: 1.6rem; margin: 0 0 1.5rem; letter-spacing: -0.005em;
+  }
+  h3 { font-family: var(--serif); font-weight: 600; color: var(--ink); font-size: 1.2rem; margin: 0; }
+  p { margin: 0 0 1rem; max-width: 68ch; }
+
+  /* Projects */
+  .project { padding: 1.5rem 0; border-bottom: 1px solid var(--rule); }
+  .project:first-of-type { padding-top: 0; }
+  .project:last-of-type { border-bottom: none; }
+  .project-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1rem; align-items: baseline; margin-bottom: 0.5rem; }
+  .project-links { display: flex; gap: 1rem; font-size: 0.92rem; }
+  .project p { color: var(--text); }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; padding: 0; margin: 0.25rem 0 0; }
+  .tags li { font-size: 0.82rem; color: var(--accent); background: var(--accent-soft); padding: 0.15rem 0.6rem; border-radius: 4px; }
+  .project.featured {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 6px;
+    padding: 1.5rem; margin-bottom: 1.5rem;
+  }
+  .featured-note { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.4rem; font-style: italic; font-family: var(--serif); }
+
+  /* Experience timeline */
+  .timeline { list-style: none; padding: 0; margin: 0; }
+  .job { display: grid; grid-template-columns: 1fr; gap: 0.25rem 2rem; padding: 0 0 1.75rem; }
+  @media (min-width: 640px) { .job { grid-template-columns: 9.5rem 1fr; } }
+  .job-date { font-size: 0.9rem; color: var(--muted); padding-top: 0.15rem; font-variant-numeric: tabular-nums; }
+  .job-org { color: var(--muted); font-size: 0.95rem; margin: 0.15rem 0 0.5rem; }
+  .job ul { margin: 0; padding-left: 1.1rem; }
+  .job li { margin-bottom: 0.3rem; max-width: 64ch; }
+
+  /* Skills */
+  .skills { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+  @media (min-width: 640px) { .skills { grid-template-columns: 9.5rem 1fr; gap: 0.9rem 2rem; } }
+  .skills dt { font-weight: 600; color: var(--ink); font-size: 0.95rem; }
+  .skills dd { margin: -0.9rem 0 0; color: var(--text); }
+  @media (min-width: 640px) { .skills dd { margin: 0; } }
+
+  /* Contact */
+  .contact-box { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 1.75rem; }
+  .contact-box p { margin-bottom: 1.25rem; }
+  .btn {
+    display: inline-block; background: var(--ink); color: var(--bg); padding: 0.7rem 1.3rem;
+    border-radius: 4px; font-weight: 500; font-size: 0.95rem;
+  }
+  .btn:hover { text-decoration: none; opacity: 0.9; }
+  .btn-secondary { background: transparent; color: var(--ink); border: 1px solid var(--rule); margin-left: 0.5rem; }
+
+  footer { font-size: 0.85rem; color: var(--muted); padding-top: 2rem; }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="monogram" aria-hidden="true">DS</div>
+    <h1 class="name">Dataram Sutrakar</h1>
+    <p class="role">Quality Assurance Engineer</p>
+    <p class="intro">I help teams ship with confidence through Playwright automation, API and performance testing, and AI-first test strategies.</p>
+    <span class="status">5+ years in web, API and performance testing</span>
+
+    <nav class="nav" aria-label="Sections" style="margin-top:2.5rem">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#highlights">What I do</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="contact-links">
+      <a href="mailto:you@example.com">Email</a>
+      <a href="https://linkedin.com/in/yourusername">LinkedIn</a>
+      <a href="https://github.com/yourusername">GitHub</a>
+    </div>
+  </aside>
+
+  <main>
+    <section id="about">
+      <h2>About</h2>
+      <p>I’m an analytical Quality Assurance Engineer with more than five years of experience testing web applications, APIs and system performance. I build intelligent CI/CD quality gates and have helped move legacy pipelines to AI-first test strategies.</p>
+      <p>My core toolkit is Playwright with JavaScript, including Codegen for fast script recording, and Postman for end-to-end API testing. I also lead on technical problems such as microservice anomalies, and use generative AI tools like Gemini, Claude Code and Cursor to speed up the development lifecycle without cutting corners on quality.</p>
+    </section>
+
+    <section id="highlights">
+      <h2>What I do</h2>
+
+      <article class="project featured">
+        <div class="featured-note">Current focus</div>
+        <div class="project-head"><h3>AI-first testing</h3></div>
+        <p>I design specialised test suites for AI features, covering prompt injection, model hallucination and performance benchmarking, and use Cursor and Claude Code to refactor frameworks and generate synthetic test data.</p>
+        <ul class="tags"><li>Gemini</li><li>Claude Code</li><li>Cursor</li><li>GPT-4</li><li>Synthetic data</li></ul>
+      </article>
+
+      <article class="project">
+        <div class="project-head"><h3>Test automation</h3></div>
+        <p>Scalable JavaScript automation frameworks built on Playwright, with Codegen used to fast-track test creation for functional, regression, sanity and integration coverage.</p>
+        <ul class="tags"><li>Playwright</li><li>JavaScript</li><li>Node.js</li><li>Codegen</li></ul>
+      </article>
+
+      <article class="project">
+        <div class="project-head"><h3>API testing</h3></div>
+        <p>End-to-end API automation workflows in Postman, with collection runners and environment setup, plus database validation across relational and non-relational layers.</p>
+        <ul class="tags"><li>Postman</li><li>Swagger</li><li>MySQL</li><li>MongoDB</li><li>Cassandra</li></ul>
+      </article>
+
+      <article class="project">
+        <div class="project-head"><h3>Performance and load testing</h3></div>
+        <p>Scalability and load testing with JMeter, and cloud-scale load testing and API benchmarking with Artillery.</p>
+        <ul class="tags"><li>Apache JMeter</li><li>Artillery</li></ul>
+      </article>
+
+      <article class="project">
+        <div class="project-head"><h3>CI/CD quality gates</h3></div>
+        <p>Smart quality gates in the delivery pipeline that stop regressions before they reach production, and mentoring teams on Gemini-driven test generation.</p>
+        <ul class="tags"><li>CI/CD</li><li>Agile/Scrum</li><li>Jira</li></ul>
+      </article>
+    </section>
+
+    <section id="experience">
+      <h2>Experience</h2>
+      <ol class="timeline" reversed>
+        <li class="job">
+          <div class="job-date">May 2025 – Present</div>
+          <div>
+            <h3>Quality Assurance Engineer</h3>
+            <div class="job-org">Valantic LCS</div>
+            <ul>
+              <li>Formulated end-to-end, AI-first QA strategies aligning product quality with business objectives.</li>
+              <li>Developed scalable Playwright automation frameworks in JavaScript, using Codegen to speed up test creation.</li>
+              <li>Used Cursor and Claude Code to refactor frameworks, generate synthetic data and test AI features.</li>
+              <li>Built test suites for prompt injection, model hallucination and performance benchmarking.</li>
+              <li>Built Postman API automation workflows and ran load and scalability tests with JMeter and Artillery.</li>
+              <li>Mentored the team on Gemini-driven test generation and set up CI/CD quality gates to block regressions.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="job">
+          <div class="job-date">Nov 2022 – Apr 2025</div>
+          <div>
+            <h3>Quality Assurance Engineer</h3>
+            <div class="job-org">Expertinasia Pvt. Ltd.</div>
+            <ul>
+              <li>Ran end-to-end functional and regression testing on critical web apps to prevent defect leakage.</li>
+              <li>Built automated scripts and test matrices, using recording tools to support shift-left testing.</li>
+              <li>Tracked defects in Jira and worked with developers to speed up root-cause analysis.</li>
+              <li>Took part in stand-ups and retrospectives to improve delivery speed and workflow.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="job">
+          <div class="job-date">Oct 2021 – Oct 2022</div>
+          <div>
+            <h3>Quality Assurance Engineer</h3>
+            <div class="job-org">Rakuten Symphony</div>
+            <ul>
+              <li>Worked with business analysts and engineers to turn requirements into multi-tier test plans.</li>
+              <li>Partnered with UAT groups to validate product changes against client expectations.</li>
+              <li>Tested APIs and databases across relational and non-relational layers using Postman.</li>
+              <li>Performed smoke, sanity, integration and regression testing on multi-tenant cloud and web platforms.</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <dl class="skills">
+        <dt>Methodologies</dt><dd>AI-first test strategy and planning, advanced AI test design, functional automation, regression, performance and load benchmarking, mobile and web testing, sanity and integration testing</dd>
+        <dt>Automation</dt><dd>Playwright (JavaScript/Node.js), Playwright Codegen, framework refactoring, synthetic data generation</dd>
+        <dt>API testing</dt><dd>Postman (end-to-end automation, Collection Runner, environments), Swagger</dd>
+        <dt>Performance</dt><dd>Apache JMeter, Artillery</dd>
+        <dt>AI tools</dt><dd>Cursor, Claude Code, Gemini, GPT-4</dd>
+        <dt>Databases</dt><dd>MySQL, MongoDB, Cassandra</dd>
+        <dt>Platforms</dt><dd>Linux, macOS, Windows</dd>
+        <dt>Workflow</dt><dd>Jira, Asana, Bugzilla, ClickUp, CI/CD quality gates, Agile/Scrum</dd>
+      </dl>
+    </section>
+
+    <section id="education">
+      <h2>Education and certifications</h2>
+      <dl class="skills">
+        <dt>Degree</dt><dd>Bachelor of Engineering, Information Technology</dd>
+        <dt>Certifications</dt><dd>Linux Administration, Python Programming, SQL</dd>
+      </dl>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="contact-box">
+        <p>Want to talk about test automation, QA strategy or a role on your team? Send me an email or connect on LinkedIn.</p>
+        <a class="btn" href="mailto:you@example.com">Email me</a>
+        <a class="btn btn-secondary" href="https://linkedin.com/in/yourusername">Connect on LinkedIn</a>
+      </div>
+      <footer>© 2026 Dataram Sutrakar</footer>
+    </section>
+  </main>
+</div>
+
+<script>
+  // Highlight the current section in the sidebar nav
+  const links = document.querySelectorAll('.nav a');
+  const sections = [...links].map(a => document.querySelector(a.getAttribute('href')));
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => s && observer.observe(s));
+</script>
+</body>
+</html>
